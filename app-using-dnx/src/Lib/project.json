@@ -1,9 +1,8 @@
 {
     "dependencies":{
-        "Lib":"",
         "System.Runtime":"4.0.0-rc1-*"
     },
     "frameworks":{
-        "dnxcore50":{}
+        "dotnet":{}
     }
 }

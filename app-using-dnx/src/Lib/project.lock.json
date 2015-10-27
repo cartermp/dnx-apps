@@ -2,14 +2,7 @@
   "locked": false,
   "version": 2,
   "targets": {
-    "DNXCore,Version=v5.0": {
-      "Lib/1.0.0": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
-        "dependencies": {
-          "System.Runtime": "4.0.0-rc1"
-        }
-      },
+    ".NETPlatform,Version=v5.0": {
       "System.Runtime/4.0.0": {
         "type": "package",
         "compile": {
@@ -17,14 +10,7 @@
         }
       }
     },
-    "DNXCore,Version=v5.0/win7-x86": {
-      "Lib/1.0.0": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
-        "dependencies": {
-          "System.Runtime": "4.0.0-rc1"
-        }
-      },
+    ".NETPlatform,Version=v5.0/win7-x86": {
       "System.Runtime/4.0.0": {
         "type": "package",
         "compile": {
@@ -32,14 +18,7 @@
         }
       }
     },
-    "DNXCore,Version=v5.0/win7-x64": {
-      "Lib/1.0.0": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.0",
-        "dependencies": {
-          "System.Runtime": "4.0.0-rc1"
-        }
-      },
+    ".NETPlatform,Version=v5.0/win7-x64": {
       "System.Runtime/4.0.0": {
         "type": "package",
         "compile": {
@@ -49,10 +28,6 @@
     }
   },
   "libraries": {
-    "Lib/1.0.0": {
-      "type": "project",
-      "path": "../Lib/project.json"
-    },
     "System.Runtime/4.0.0": {
       "type": "package",
       "sha512": "Uq9epame8hEqJlj4KaWb67dDJvj4IM37jRFGVeFbugRdPz48bR0voyBhrbf3iSa2tAmlkg4lsa6BUOL9iwlMew==",
@@ -104,9 +79,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Lib ",
       "System.Runtime >= 4.0.0-rc1-*"
     ],
-    "DNXCore,Version=v5.0": []
+    ".NETPlatform,Version=v5.0": []
   }
 }

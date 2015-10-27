@@ -7,6 +7,14 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
+          "Lib": null,
+          "System.Runtime": "4.0.0-rc1"
+        }
+      },
+      "Lib/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.0",
+        "dependencies": {
           "System.Runtime": "4.0.0-rc1"
         }
       },
@@ -951,6 +959,14 @@
       "App/1.0.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
+        "dependencies": {
+          "Lib": null,
+          "System.Runtime": "4.0.0-rc1"
+        }
+      },
+      "Lib/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.0",
         "dependencies": {
           "System.Runtime": "4.0.0-rc1"
         }
@@ -2159,6 +2175,14 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
+          "Lib": null,
+          "System.Runtime": "4.0.0-rc1"
+        }
+      },
+      "Lib/1.0.0": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.0",
+        "dependencies": {
           "System.Runtime": "4.0.0-rc1"
         }
       },
@@ -3366,6 +3390,10 @@
     "App/1.0.0": {
       "type": "project",
       "path": "../../src/App/project.json"
+    },
+    "Lib/1.0.0": {
+      "type": "project",
+      "path": "../../src/Lib/project.json"
     },
     "Microsoft.Dnx.Compilation.Abstractions/1.0.0-beta8": {
       "type": "package",
@@ -5574,6 +5602,7 @@
   "projectFileDependencyGroups": {
     "": [
       "App ",
+      "Lib ",
       "System.Runtime >= 4.0.0-rc1-*",
       "xunit >= 2.1.0-*",
       "xunit.runner.dnx >= 2.1.0-*"
