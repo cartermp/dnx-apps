@@ -15,12 +15,13 @@ public class AppTest
     {
         string banana = "apple";
 
-        Assert.NotEqual(banana, App.UseLib());
+        Assert.NotEqual(banana, App.UseLib() /* returns "banana" */);
     }
 
     [Fact]
     public static void TestLibAndAppAreSame()
     {
+        // Both return "banana"
         Assert.Equal(App.UseLib(), Library.GetName());
     }
 }
