@@ -4,6 +4,9 @@
         "System.Runtime":"4.0.0-rc1-*"
     },
     "frameworks":{
-        "dnxcore50":{}
+        "dnxcore50":{},
+        "dotnet51":{},
+        "dotnet55":{},
+        "net45":{}
     }
 }
