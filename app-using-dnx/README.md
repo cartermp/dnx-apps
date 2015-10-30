@@ -4,7 +4,10 @@ It demonstrates how to build a library which can target the following:
 
 * DNX Core
 * .NET Core
+* .NET Framework 4.0
 * .NET Framework 4.5
+* PCL Profile 328 (.NET Framework 4.0, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8, Silverlight 5)
+* PCL Profile 336 (.NET Framework 4.0.3, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8, Silverlight 5)
 * PCL Profile 344 (.NET Framework 4.5, Windows 8, Windows Phone 8.1, Windows Phone Silverlight 8, Silverlight 5)
 
 It also demonstrates how to build an XUnit test which can be run without Visual Studio.
