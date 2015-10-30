@@ -1,13 +1,13 @@
 using Xunit;
-using AppUsingDnx;
 using Lib;
+using SomeDependencyLib;
 
-public class AppTest
+public class LibTest
 {
     [Fact]
     public static void TestAdd()
     {
-        Assert.Equal(4, App.Foo());
+        Assert.Equal(4, Library.Foo());
     }
 
     [Fact]
@@ -15,13 +15,13 @@ public class AppTest
     {
         string banana = "apple";
 
-        Assert.NotEqual(banana, App.UseLib() /* returns "banana" */);
+        Assert.NotEqual(banana, Library.Bar() /* returns "banana" */);
     }
 
     [Fact]
     public static void TestLibAndAppAreSame()
     {
         // Both return "banana"
-        Assert.Equal(App.UseLib(), Library.GetName());
+        Assert.Equal(Library.Bar(), TheDependencyLib.GetName());
     }
 }

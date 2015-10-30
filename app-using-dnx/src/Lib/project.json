@@ -1,6 +1,19 @@
 {
+    "dependencies":{
+        "SomeDependencyLib":""
+    },
     "frameworks":{
-        "dotnet":{
+        "dnxcore50":{
+            "dependencies":{
+                "System.Runtime":"4.0.0-rc1-*"
+            }
+        },
+        "dotnet51":{
+            "dependencies":{
+                "System.Runtime":"4.0.0-rc1-*"
+            }
+        },
+        "dotnet55":{
             "dependencies":{
                 "System.Runtime":"4.0.0-rc1-*"
             }

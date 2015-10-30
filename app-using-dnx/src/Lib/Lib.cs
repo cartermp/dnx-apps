@@ -1,9 +1,17 @@
-using System;
+using SomeDependencyLib;
 
 namespace Lib
 {
-    public class Library
+    public static class Library
     {
-        public static string GetName() => "bananas";
+        public static int Foo()
+        {
+            return 2 + 2;
+        }
+
+        public static string Bar()
+        {
+            return TheDependencyLib.GetName();
+        }
     }
 }
