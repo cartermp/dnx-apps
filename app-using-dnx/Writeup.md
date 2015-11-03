@@ -19,7 +19,7 @@ To target specific versions of .NET Framework, add the relevant Target Framework
 }
 ```
 
-And that's it!  Run `dnu restore` and `dnu build` from the command line, and your library can now be built!  You will now notice three new entries in your `/bin/Debug` folder:
+And that's it!  Run `dnu restore` and `dnu build` from the command line, and your library can now be built!  You will now notice three new entries in your `/bin` folder:
 
 ```
 /bin
@@ -29,11 +29,25 @@ And that's it!  Run `dnu restore` and `dnu build` from the command line, and you
       /dotnet51
 ```
 
+Finally, running `dnu pack` will build a NuGet package, and your `/bin/Debug` folder will look like this:
+
+```
+/bin
+   /Debug
+      /net40
+      /net45
+      /dotnet51
+   Lib.1.0.0.nupkg
+   Lib.1.0.0.symbols.nupkg
+```
+
+And now you have the necessary files to publish a NuGet package!
+
 **NOTE:** This assumes your code will compile across *both* .NET Core and .NET Framework.  Read the section on cross-compiling with `#ifdef`s on how to compile the same file differently for each target if you are using features which are unavailable in some of your targets.
 
 ## How do I target a PCL?
 
-Targeting a PCL profile is a bit trickier.  For starters, [reference this](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY) list of PCL profiles to ensure you have the correct target.  Hover over the Name of each entry for the framework identifier, which you will need.
+Targeting a PCL profile is a bit trickier.  For starters, [reference this list of PCL profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY) to ensure you have the correct target.  Hover over the Name of each entry for the framework identifier, which you will need.
 
 Unfortunately, you will need to list the dependencies for each target when you wish to additionally target a PCL with your library.  Something like this:
 
@@ -80,6 +94,30 @@ Here is an example targeting PCL Profile 344 and .NET Core, using only `System.R
 ```
 
 This will allow you to target .NET Core 5.1, .NET Core 5.5, .NET Framework 4.5, Windows 8, Windows Phone 8.1, and Silverlight 5.0.
+
+Run `dnu restore` and `dnu build` from the command line, and your library can now be built!  You will now notice three new entries in your `/bin/Debug` folder:
+
+```
+/bin
+   /Debug
+      /dotnet51
+      /dotnet55
+      /portable-net45+sl50+netcore45+wpa81+wp8
+```
+
+Finally, run `dnu pack` to build a NuGet pakage, and your `/bin` folder should look like this:
+
+```
+/bin
+   /Debug
+      /dotnet51
+      /dotnet55
+      /portable-net45+sl50+netcore45+wpa81+wp8
+   Lib.1.0.0.nupkg
+   Lib.1.0.0.symbols.nupkg
+```
+
+And now you can publish a NuGet package!
 
 **NOTE:** This assumes your code will compile across *both* .NET Core and .NET Framework.  Read the section on cross-compiling with `#ifdef`s on how to compile the same file differently for each target if you are using features which are unavailable in some of your targets.
 
