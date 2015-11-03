@@ -37,8 +37,8 @@ Finally, running `dnu pack` will build a NuGet package, and your `/bin/Debug` fo
       /net40
       /net45
       /dotnet51
-   Lib.1.0.0.nupkg
-   Lib.1.0.0.symbols.nupkg
+      Lib.1.0.0.nupkg
+      Lib.1.0.0.symbols.nupkg
 ```
 
 And now you have the necessary files to publish a NuGet package!
@@ -105,7 +105,7 @@ Run `dnu restore` and `dnu build` from the command line, and your library can no
       /portable-net45+sl50+netcore45+wpa81+wp8
 ```
 
-Finally, run `dnu pack` to build a NuGet pakage, and your `/bin` folder should look like this:
+Finally, run `dnu pack` to build a NuGet pakage, and your `/bin/Debug` folder should look like this:
 
 ```
 /bin
@@ -113,8 +113,8 @@ Finally, run `dnu pack` to build a NuGet pakage, and your `/bin` folder should l
       /dotnet51
       /dotnet55
       /portable-net45+sl50+netcore45+wpa81+wp8
-   Lib.1.0.0.nupkg
-   Lib.1.0.0.symbols.nupkg
+      Lib.1.0.0.nupkg
+      Lib.1.0.0.symbols.nupkg
 ```
 
 And now you can publish a NuGet package!
