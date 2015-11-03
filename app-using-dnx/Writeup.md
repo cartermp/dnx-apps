@@ -19,7 +19,7 @@ To target specific versions of .NET Framework, add the relevant Target Framework
 }
 ```
 
-And that's it!  Run `dotnet restore` and `dotnet build` from the command line, and your library can now be built!  You will now notice three new entries in your `/bin/Debug` folder:
+And that's it!  Run `dnu restore` and `dnu build` from the command line, and your library can now be built!  You will now notice three new entries in your `/bin/Debug` folder:
 
 ```
 /bin
@@ -53,7 +53,7 @@ Unfortunately, you will need to list the dependencies for each target when you w
 
 Additionally, you will need to list the framework assemblies you choose to reference inside each PCL target profile in your `project.json` file.  This will likely require, at a minimum, `mscorlib`, `System`, and `System.Core`.
 
-Here is an example targeting PCL Profile 344 and .NET Core, using only `System.Runtime` as a dependency.  Note that you need to have .NET Framework already installed on your machine for this to build.
+Here is an example targeting PCL Profile 344 and .NET Core, using only `System.Runtime` as a dependency.
 
 ```
 {
