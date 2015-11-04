@@ -119,34 +119,68 @@ Finally, run `dnu pack` to build a NuGet pakage, and your `/bin/Debug` folder sh
 
 And now you can publish a NuGet package!
 
-**NOTE:** This assumes your code will compile across *both* .NET Core and .NET Framework.  Read the section on cross-compiling with `#ifdef`s on how to compile the same file differently for each target if you are using features which are unavailable in some of your targets.
+**NOTE:** This assumes your code will compile across *both* .NET Core and .NET Framework.  Read the section on cross-compiling with `#if`s on how to compile the same file differently for each target if you are using features which are unavailable in some of your targets.
 
 ## How do I cross-compile to use newer features for newer versions of .NET?
 
-Newer versions of .NET introduce improved APIs that you'll want to take advantage of.  However, if you're targeting an older version of .NET, you need to also support older APIs!  The solution for this is to cross-compile with `#ifdef` guards.
+Newer versions of .NET introduce improved APIs that you'll want to take advantage of.  However, if you're targeting an older version of .NET, you need to also support older APIs!  The solution for this is to cross-compile with `#if` guards.
 
-For example, .NET 4.5 introduced the `System.Foo.Net45AndAbove` API which provides some great functionality, but this is not available in .NET 4.0.  Instead, for .NET 4.0, you need to use the `System.Foo.OlderLibrary` API.  This can be accomplished thusly:
+For example, in .NET Core you can use `HttpClient` in the `System.Net.Http` API to perform network operations over Http.  However, the .NET 4.0 Framework does not include `HttpClient`!  Instead, you may need to use `WebClient` from the `System.Net` assembly.
+
+First, the `project.json` file should look something like this:
+
+```
+{
+    "frameworks":{
+        "net40":{
+            "frameworkAssemblies": {
+                "System.Net":"",
+                "System.Text.RegularExpressions":""
+            }
+            
+        },
+        "dotnet55":{
+            "dependencies": {
+                "System.Runtime":"4.0.0-rc1-*",
+                "System.Net.Http": "4.0.1-beta-23409",
+                "System.Text.RegularExpressions": "4.0.11-beta-23409"
+            }
+        }
+    }
+}
+
+```
+
+Note that framework assemblies being used are explicitly referenced in the `net40` target, and NuGet references are also explictly listed in the `dotnet55` target.
+
+Next, your `#include`s in your source file can be adjusted like this:
 
 ```csharp
 #ifdef NET40
 // This only compiles for non .NET 4.0 targets
-using System.Foo.OlderLibrary;
+using System.Net;
 #else
-// Compiles for .NET 4.5 and above!
-using System.Foo.Net45AndAbove;
+// This compiles for all other targets
+using System.Net.Http;
 #endif
 ```
 
 And further down in the source, you can use guards to use those libraries conditionally:
 
 ```csharp
-        public void GetResult(int input)
+public string GetDotNetCount()
         {
-#ifdef NET40
-            var result = OlderLibrary.GetResult(input);
+            string url = "http://www.dotnetfoundation.org/";
+            
+#if NET40
+            var uri = new Uri(url);
+            var result = new WebClient().DownloadString(uri);
 #else
-            var result = Net45AndAbove.GetResult(intput);
+            var result = new HttpClient().GetStringAsync(url).Result;
 #endif
+            
+            int dotNetCount = Regex.Matches(result, ".NET").Count;
+            return $"Dotnet Foundation mentions .NET {dotNetCount} times!";
         }
 ```
 
@@ -189,7 +223,7 @@ For example, if you wanted to targeting PCL profile 344, you may want to refer i
 Now you can conditionally compile against that target:
 
 ```csharp
-#ifdef PORTABLE344
+#if PORTABLE344
 using System.Foo.Portable344CompatibleLibrary;
 #endif
 ```
