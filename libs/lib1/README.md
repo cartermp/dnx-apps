@@ -1,5 +1,4 @@
 Targets:
 
-* DNXCore 5.0
-* .NETPlatform 5.1
-* .NETPlatform 5.5
+* .NET Core 5.5
+* .NET Frameowrk 4.0
