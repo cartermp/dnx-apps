@@ -159,7 +159,7 @@ And now you can publish a NuGet package!
 
 ## How do I cross-compile to use newer features for newer versions of .NET?
 
-Newer versions of .NET introduce improved APIs that you'll want to take advantage of.  However, if you're targeting an older version of .NET, you need to also support older APIs!  The solution for this is to cross-compile with `#if` guards.
+If you need to support .NET Framework and .NET Core, you may find yourself needing to use different APIs to accomplish the same task.  You may also wish to support different language constructs (such as `async` and `await`) and support modern APIs within the same file.  A great way to do this is to cross-compile with `#if` guards.
 
 For example, in .NET Core you can use `HttpClient` in the `System.Net.Http` API to perform network operations over Http.  However, the .NET 4.0 Framework does not include `HttpClient`!  Instead, you may need to use `WebClient` from the `System.Net` assembly.
 
@@ -175,7 +175,7 @@ First, the `project.json` file should look something like this:
             }
             
         },
-        "dotnet":{
+        "dotnet55":{
             "dependencies": {
                 "System.Runtime":"4.0.0-rc1-*",
                 "System.Net.Http": "4.0.1-beta-23409",
@@ -188,7 +188,7 @@ First, the `project.json` file should look something like this:
 
 ```
 
-Note that framework assemblies being used are explicitly referenced in the `net40` target, and NuGet references are also explictly listed in the `dotnet` target.
+Note that framework assemblies being used are explicitly referenced in the `net40` target, and NuGet references are also explictly listed in the `dotnet55` target.
 
 Next, your `using`s in your source file can be adjusted like this:
 
