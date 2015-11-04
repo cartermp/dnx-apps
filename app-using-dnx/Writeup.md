@@ -153,7 +153,8 @@ First, the `project.json` file should look something like this:
             "dependencies": {
                 "System.Runtime":"4.0.0-rc1-*",
                 "System.Net.Http": "4.0.1-beta-23409",
-                "System.Text.RegularExpressions": "4.0.11-beta-23409"
+                "System.Text.RegularExpressions": "4.0.11-beta-23409",
+                "System.Threading.Tasks": "4.0.11-beta-23409"
             }
         }
     }
@@ -172,6 +173,7 @@ using System.Net;
 #else
 // This compiles for all other targets
 using System.Net.Http;
+using System.Threading.Tasks;
 #endif
 ```
 
