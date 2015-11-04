@@ -123,4 +123,38 @@ And now you can publish a NuGet package!
 
 ## How do I cross-compile to use newer features for newer versions of .NET?
 
-some stuff about how to do `#ifdef`s
+Newer versions of .NET introduce improved APIs that you'll want to take advantage of.  However, if you're targeting an older version of .NET, you need to also support older APIs!  The solution for this is to cross-compile with `#ifdef` guards.
+
+For example, .NET 4.5 introduced the `System.Foo.Net45AndAbove` API which provides some great functionality, but this is not available in .NET 4.0.  Instead, for .NET 4.0, you need to use the `System.Foo.OlderLibrary` API.  This can be accomplished thusly:
+
+```csharp
+#ifdef NET40
+// This only compiles for non .NET 4.0 targets
+using System.Foo.OlderLibrary
+#else
+// Compiles for .NET 4.5 and above!
+using System.Foo.Net45AndAbove
+#endif
+```
+
+And further down in the source, you can use guards to use those libraries conditionally:
+
+```csharp
+#ifdef NET40
+public void GetResult(int input)
+{
+#ifdef NET40
+    var result = OlderLibrary.GetResult(input);
+#else
+    var result = Net45AndAbove.GetResult(intput);
+#endif
+}
+```
+
+And that's it!
+
+## But What about Portable Libraries?
+
+PCLs add *one* more thing to do before you can use `#ifdef`s to conditionally compile different targets.
+
+// TODO: add more
