@@ -5,14 +5,14 @@ using System.Net;
 #else
 // Generic collections are just a part of
 using System.Net.Http;
-//using System.Threading.Tasks;
+using System.Threading.Tasks;
 #endif
 
 using System.Text.RegularExpressions;
 
 namespace Lib
 {
-    public class Foo
+    public class Library
     {
 #if NET40
         private readonly WebClient _client = new WebClient();
@@ -33,7 +33,7 @@ namespace Lib
             return $"Dotnet Foundation mentions .NET {dotNetCount} times!";
         }
 #else
-        public string GetDotNetCountAsync()
+        public async Task<string> GetDotNetCountAsync()
         {
             string url = "http://www.dotnetfoundation.org/";
             
