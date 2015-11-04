@@ -53,7 +53,7 @@ Finally, running `dnu pack` will build a NuGet package, and your `/bin/Debug` fo
 
 And now you have the necessary files to publish a NuGet package!
 
-**NOTE:** This assumes your code will compile across *both* .NET Core and .NET Framework.  Read the section on cross-compiling with `#ifdef`s on how to compile the same file differently for each target if you are using features which are unavailable in some of your targets.
+**NOTE:** This assumes your code will compile across *both* .NET Core and .NET Framework.  Read the section on cross-compiling with `#if`s on how to compile the same file differently for each target if you are using features which are unavailable in some of your targets.
 
 ## How do I target a PCL?
 
@@ -163,7 +163,7 @@ First, the `project.json` file should look something like this:
 
 Note that framework assemblies being used are explicitly referenced in the `net40` target, and NuGet references are also explictly listed in the `dotnet` target.
 
-Next, your `#include`s in your source file can be adjusted like this:
+Next, your `using`s in your source file can be adjusted like this:
 
 ```csharp
 #ifdef NET40
@@ -217,7 +217,9 @@ And that's it!
 
 ## But What about Portable Libraries?
 
-PCLs add *one* more thing to do before you can use `#ifdef`s to conditionally compile different targets: **you need to add a moniker in your** `project.json` **file!**.
+//TODO -- replace with actual libraries
+
+PCLs add *one* more thing to do before you can use `#if`s to conditionally compile different targets: **you need to add a moniker in your** `project.json` **file!**.
 
 For example, if you wanted to targeting PCL profile 344, you may want to refer it to as "PORTABLE344" when cross-compiling.  Simply add it to the `project.json` file as a `compilationOptions` attribute:
 
