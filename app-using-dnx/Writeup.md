@@ -130,10 +130,10 @@ For example, .NET 4.5 introduced the `System.Foo.Net45AndAbove` API which provid
 ```csharp
 #ifdef NET40
 // This only compiles for non .NET 4.0 targets
-using System.Foo.OlderLibrary
+using System.Foo.OlderLibrary;
 #else
 // Compiles for .NET 4.5 and above!
-using System.Foo.Net45AndAbove
+using System.Foo.Net45AndAbove;
 #endif
 ```
 
@@ -154,6 +154,44 @@ And that's it!
 
 ## But What about Portable Libraries?
 
-PCLs add *one* more thing to do before you can use `#ifdef`s to conditionally compile different targets.
+PCLs add *one* more thing to do before you can use `#ifdef`s to conditionally compile different targets: **you need to add a moniker in your** `project.json` **file!**.
 
-// TODO: add more
+For example, if you wanted to targeting PCL profile 344, you may want to refer it to as "PORTABLE344" when cross-compiling.  Simply add it to the `project.json` file as a `compilationOptions` attribute:
+
+```
+{
+    "frameworks":{
+        "dotnet51":{
+           "dependencies":{
+                "System.Runtime":"4.0.0-rc1-*"
+            }
+        },
+        "dotnet55":{
+           "dependencies":{
+                "System.Runtime":"4.0.0-rc1-*"
+            }
+        },
+        ".NETPortable,Version=v4.0,Profile=Profile344":{
+            "compilationOptions": {
+                "define": [ "PORTABLE344" ]
+            },
+            "frameworkAssemblies":{
+                "mscorlib":"",
+                "System":"",
+                "System.Core":""
+            }
+        }
+    }
+}
+
+```
+
+Now you can conditionally compile against that target:
+
+```csharp
+#ifdef PORTABLE344
+using System.Foo.Portable344CompatibleLibrary;
+#endif
+```
+
+And that's it! `PORTABLE344` is now recognized by the compiler, and the `.dll` generated for that target will now contain `System.Foo.Portable344CompatibleLibrary`, but your other target `.dll`s will not.
