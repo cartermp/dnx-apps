@@ -3,7 +3,6 @@ using System;
 #if NET40
 using System.Net;
 #else
-// Generic collections are just a part of
 using System.Net.Http;
 using System.Threading.Tasks;
 #endif
@@ -41,7 +40,7 @@ namespace Lib
             
             int dotNetCount = Regex.Matches(result, ".NET").Count;
             
-            return $"Dotnet Foundation mentions .NET {dotNetCount} times!";
+            return $"dotnetfoundation.orgmentions .NET {dotNetCount} times in its HTML!";
         }
 #endif
     }

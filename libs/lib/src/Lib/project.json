@@ -7,7 +7,7 @@
             }
             
         },
-        "dotnet55":{
+        "dotnet":{
             "dependencies": {
                 "System.Runtime":"4.0.0-rc1-*",
                 "System.Net.Http": "4.0.1-beta-23409",
