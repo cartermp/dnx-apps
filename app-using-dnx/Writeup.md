@@ -2,19 +2,44 @@
 
 blah blah some intro
 
-## What do I do if I want to target .NET Core?
+## How do I target .NET Core?
 
-The first step is to decide on the *version* of .NET Core you need to target.  [This document](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md) outlines everything you need to know, in-depth, about what each .NET Core target means.
+First thing's first:  for the purposes of building a library, targetting ".NET Core" means targetting the .NET Standard Platform.  [This document](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md) outlines everything you need to know, in-depth, about what that actually means.
 
 The distilled version is this:
 
-1. Pick any one of `dotnet51`, `dotnet52`, `dotnet53`, `dotnet54`, or `dotnet55` if you don't care about sharing code which can also run on .NET Framework.
+1. If you don't care about backwards compatibility, target `dotnet55`.
+2. If you care about compatibility with .NET Framework versions from 4.5 and up, Windows Phone, Windows Phone Silverlight, Universal Windows Platform, DNX Core, Xamarin Platforms, or Mono, [refer to this table](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md#existing-net-standard-platform-versions) to choose the *version* of the `dotnet` moniker you need.
 
-// TODO add more
+The next step is to add the moniker you care about to your `project.json` file.
 
-## How do I target .NET Core and .NET Framework?
+For example, if you wanted to have compatibility with .NET Core and .NET Framework 4.6, you would pick `dotnet55`:
 
-To target specific versions of .NET Framework, add the relevant Target Framework Moniker, such as `net45` to your `project.json` file.  Below is a sample `project.json` file which targets .NET 4.0, .NET 4.5, and .NET Core.
+```
+{
+    "frameworks":{
+        "dotnet55":{}
+    }
+}
+```
+
+If you wanted to be compatible with Windows Phone Silverlight, you would pick `dotnet51`:
+
+```
+{
+    "frameworks":{
+        "dotnet51":{}
+    }
+}
+```
+
+And that's it!
+
+## How do I target both .NET Core and .NET Framework?
+
+You may need a library to work on .NET Core *and* older versions of the .NET Framework.  You may also need to use specific libraries available in .NET 4.5 which are unavailble in .NET Core (such as `SYSTEM.FIXME.SOON`).  For these scenarios, you will need to specifically target the versions of .NET Framework you support.
+
+This is done by adding relevant Target Framework Moniker, such as `net45` to your `project.json` file.  Below is a sample `project.json` file which targets .NET 4.0, .NET 4.5, and .NET Core.
 
 ```
 {
