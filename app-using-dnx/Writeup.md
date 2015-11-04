@@ -168,20 +168,39 @@ using System.Net.Http;
 And further down in the source, you can use guards to use those libraries conditionally:
 
 ```csharp
-public string GetDotNetCount()
+    public class Library
+    {
+#if NET40
+        private readonly WebClient _client = new WebClient();
+#else
+        private readonly HttpClient _client = new HttpClient();
+#endif
+
+#if NET40
+        public string GetDotNetCount()
+        {
+            string url = "http://www.dotnetfoundation.org/";
+          
+            var uri = new Uri(url);
+            var result = _client.DownloadString(uri);
+            
+            int dotNetCount = Regex.Matches(result, ".NET").Count;
+            
+            return $"Dotnet Foundation mentions .NET {dotNetCount} times!";
+        }
+#else
+        public async Task<string> GetDotNetCountAsync()
         {
             string url = "http://www.dotnetfoundation.org/";
             
-#if NET40
-            var uri = new Uri(url);
-            var result = new WebClient().DownloadString(uri);
-#else
-            var result = new HttpClient().GetStringAsync(url).Result;
-#endif
+            var result = await _client.GetStringAsync(url);
             
             int dotNetCount = Regex.Matches(result, ".NET").Count;
-            return $"Dotnet Foundation mentions .NET {dotNetCount} times!";
+            
+            return $"dotnetfoundation.orgmentions .NET {dotNetCount} times in its HTML!";
         }
+#endif
+    }
 ```
 
 And that's it!
