@@ -167,7 +167,7 @@ Note that framework assemblies being used are explicitly referenced in the `net4
 Next, your `using`s in your source file can be adjusted like this:
 
 ```csharp
-#ifdef NET40
+#if NET40
 // This only compiles for non .NET 4.0 targets
 using System.Net;
 #else
