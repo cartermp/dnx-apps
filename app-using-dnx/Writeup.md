@@ -140,15 +140,14 @@ using System.Foo.Net45AndAbove
 And further down in the source, you can use guards to use those libraries conditionally:
 
 ```csharp
+        public void GetResult(int input)
+        {
 #ifdef NET40
-public void GetResult(int input)
-{
-#ifdef NET40
-    var result = OlderLibrary.GetResult(input);
+            var result = OlderLibrary.GetResult(input);
 #else
-    var result = Net45AndAbove.GetResult(intput);
+            var result = Net45AndAbove.GetResult(intput);
 #endif
-}
+        }
 ```
 
 And that's it!
