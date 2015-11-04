@@ -2,6 +2,16 @@
 
 blah blah some intro
 
+## What do I do if I want to target .NET Core?
+
+The first step is to decide on the *version* of .NET Core you need to target.  [This document](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md) outlines everything you need to know, in-depth, about what each .NET Core target means.
+
+The distilled version is this:
+
+1. Pick any one of `dotnet51`, `dotnet52`, `dotnet53`, `dotnet54`, or `dotnet55` if you don't care about sharing code which can also run on .NET Framework.
+
+// TODO add more
+
 ## How do I target .NET Core and .NET Framework?
 
 To target specific versions of .NET Framework, add the relevant Target Framework Moniker, such as `net45` to your `project.json` file.  Below is a sample `project.json` file which targets .NET 4.0, .NET 4.5, and .NET Core.
@@ -14,7 +24,7 @@ To target specific versions of .NET Framework, add the relevant Target Framework
     "frameworks":{
         "net40":{},
         "net45":{},
-        "dotnet51":{}
+        "dotnet":{}
     }
 }
 ```
@@ -26,7 +36,7 @@ And that's it!  Run `dnu restore` and `dnu build` from the command line, and you
    /Debug
       /net40
       /net45
-      /dotnet51
+      /dotnet
 ```
 
 Finally, running `dnu pack` will build a NuGet package, and your `/bin/Debug` folder will look like this:
@@ -36,7 +46,7 @@ Finally, running `dnu pack` will build a NuGet package, and your `/bin/Debug` fo
    /Debug
       /net40
       /net45
-      /dotnet51
+      /dotnet
       Lib.1.0.0.nupkg
       Lib.1.0.0.symbols.nupkg
 ```
