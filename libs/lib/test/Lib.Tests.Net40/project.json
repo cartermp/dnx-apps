@@ -1,15 +1,18 @@
 {
     "commands":{
-        "test":"xunit.runner.dnx"
+        "test":"xunit.console.exe"
     },
     "dependencies":{
         "Lib":"",
-        "System.Runtime":"4.0.0-rc1-*",
-        "xunit": "2.1.0-*",
-        "xunit.runner.dnx": "2.1.0-*",
-        "System.Console": "4.0.0-beta-23409"
+        "xunit": "1.9.0"
     },
     "frameworks":{
-        "net40":{}
+        "net40":{
+            "frameworkAssemblies": {
+                "mscorlib":"",
+                "System":"",
+                "System.Core":""            
+            }
+        }
     }
 }

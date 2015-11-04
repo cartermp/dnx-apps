@@ -10,7 +10,7 @@ public class LibTest
 	{
 		string result = new Library().GetDotNetCount();
 		
-		Console.WriteLine(result)
+		Console.WriteLine(result);
 		
 		Assert.False(string.IsNullOrWhiteSpace(result));
 	}
