@@ -157,7 +157,7 @@ And now you can publish a NuGet package!
 
 **NOTE:** This assumes your code will compile across *both* .NET Core and .NET Framework.  Read the section on cross-compiling with `#if`s on how to compile the same file differently for each target if you are using features which are unavailable in some of your targets.
 
-## How do I cross-compile to use newer features for newer versions of .NET?
+## How do I cross-compile for .NET Core and .NET Framework?
 
 If you need to support .NET Framework and .NET Core, you may find yourself needing to use different APIs to accomplish the same task.  You may also wish to support different language constructs (such as `async` and `await`) and support modern APIs within the same file.  A great way to do this is to cross-compile with `#if` guards.
 
