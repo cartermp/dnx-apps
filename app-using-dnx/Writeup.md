@@ -4,14 +4,14 @@ blah blah some intro
 
 ## How do I target .NET Core?
 
-First thing's first:  for the purposes of building a library, targetting ".NET Core" means targetting the .NET Standard Platform.  [This document](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md) outlines everything you need to know, in-depth, about what that actually means.
+First thing's first:  for the purposes of building a library, targetting ".NET Core" means targetting the .NET Standard Platform.  [This document](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md) outlines everything you need to know, in-depth, about what that means.
 
 The distilled version is this:
 
+You need to pick a version of `dotnetXX` (where `XX` is a version number) to add to your `project.json` file.
+
 1. If you don't care about backwards compatibility, target `dotnet55`.
 2. If you care about compatibility with .NET Framework versions from 4.5 and up, Windows Phone, Windows Phone Silverlight, Universal Windows Platform, DNX Core, Xamarin Platforms, or Mono, [refer to this table](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md#existing-net-standard-platform-versions) to choose the *version* of the `dotnet` moniker you need.
-
-The next step is to add the moniker you care about to your `project.json` file.
 
 For example, if you wanted to have compatibility with .NET Core and .NET Framework 4.6, you would pick `dotnet55`:
 
