@@ -6,7 +6,7 @@ using System;
 public class LibTest
 {	
 	[Fact]
-	public async Task PostNet40Test()
+	public async Task GetDotNetCountTest()
 	{
 		string result = await new Library().GetDotNetCountAsync();
 		
