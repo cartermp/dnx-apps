@@ -12,6 +12,7 @@ You need to pick a version of `dotnetXX` (where `XX` is a version number) to add
 
 1. If you don't care about backwards compatibility, target `dotnet55`.
 2. If you care about compatibility with .NET Framework versions from 4.5 and up, Windows Phone, Windows Phone Silverlight, Universal Windows Platform, DNX Core, Xamarin Platforms, or Mono, [refer to this table](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md#existing-net-standard-platform-versions) to choose the *version* of the `dotnet` moniker you need.
+3. If you care about compatbility with the .NET Framework versions 4.0 or below, read the next section about how to target them.
 
 For example, if you wanted to have compatibility with .NET Core and .NET Framework 4.6, you would pick `dotnet55`:
 
