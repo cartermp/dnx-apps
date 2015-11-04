@@ -139,7 +139,7 @@ First, the `project.json` file should look something like this:
             }
             
         },
-        "dotnet55":{
+        "dotnet":{
             "dependencies": {
                 "System.Runtime":"4.0.0-rc1-*",
                 "System.Net.Http": "4.0.1-beta-23409",
@@ -151,7 +151,7 @@ First, the `project.json` file should look something like this:
 
 ```
 
-Note that framework assemblies being used are explicitly referenced in the `net40` target, and NuGet references are also explictly listed in the `dotnet55` target.
+Note that framework assemblies being used are explicitly referenced in the `net40` target, and NuGet references are also explictly listed in the `dotnet` target.
 
 Next, your `#include`s in your source file can be adjusted like this:
 
