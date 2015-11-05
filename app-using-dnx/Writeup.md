@@ -6,7 +6,7 @@ blah blah some intro
 
 First things first:
 
-For the purposes of building a library, targeting ".NET Core" means targetting the .NET Standard Platform.  [This document](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md) outlines everything you need to know, in-depth, about what that means.
+For the purposes of building a library, targeting ".NET Core" means targetting the .NET Standard Platform.  [This document](https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/standard-platform.md) outlines everything you need to know, in-depth, about what that means.
 
 A distilled version is this:
 
@@ -23,7 +23,7 @@ You need to pick a version of `dotnetXX` (where `XX` is a version number) to add
     - Xamarin Platforms
     - Mono 
 
-    Then [refer to this table](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md#existing-net-standard-platform-versions) and choose the version of the `dotnetXX` moniker you need.
+    Then [refer to this table](https://github.com/dotnet/corefx/blob/master/Documentation/project-docs/standard-platform.md#existing-net-standard-platform-versions) and choose the version of the `dotnetXX` moniker you need.
 3. If you care about compatibility with the .NET Framework versions 4.0 or below, or need to support [these .NET 4.5 libraries](LINK), skip to the next section.
 
 For example, if you wanted to have compatibility with .NET Core and .NET Framework 4.6, you would pick `dotnet55`:
