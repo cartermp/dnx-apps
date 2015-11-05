@@ -293,4 +293,4 @@ using System.Threading.Tasks;
 #endif
 ```
 
-And that's it! `PORTABLE328` is now recognized by the compiler, and the `.dll` generated will not use `System.Net.Http` or `System.Threading.Tasks`.
+And that's it! Because `PORTABLE328` is now recognized by the compiler, and the generated `.dll` which corresponds to PCL Prfile 328 will not include `System.Net.Http` or `System.Threading.Tasks`.
