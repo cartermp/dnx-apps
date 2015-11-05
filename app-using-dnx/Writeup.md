@@ -97,23 +97,10 @@ And now you have the necessary files to publish a NuGet package!
 
 Targeting a PCL profile is a bit trickier.  For starters, [reference this list of PCL profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview) to ensure you have the correct target.  Hover over the Name of each entry for the framework identifier, which you will need.
 
-Unfortunately, you will need to list the dependencies for each target when you wish to additionally target a PCL with your library.  Something like this:
+You will then need to do two things:
 
-```
-{
-    "dependencies":{
-        "System.Runtime":"4.0.0-rc1-*"
-    },
-    "frameworks":{
-        "dotnet":{},
-        "the-pcl-profile-i'm-targeting":{}
-    }
-}
-```
-
-**Will not work!**
-
-Additionally, you will need to list the framework assemblies you choose to reference inside each PCL target profile in your `project.json` file.  This will likely require, at a minimum, `mscorlib`, `System`, and `System.Core`.
+1. List the dependencies for each target *inside* of that target.  No "global" `dependencies` section can be used.
+2. List the framework assemblies you are using in your code *inside* the PCL target profile section.  This will likely require, at a minimum, `mscorlib`, `System`, and `System.Core`.
 
 Here is an example targeting PCL Profile 328 and .NET Core, using only `System.Runtime` as a dependency.
 
