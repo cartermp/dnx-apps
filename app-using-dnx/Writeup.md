@@ -252,7 +252,7 @@ And that's it!
 
 ### But What about Portable Libraries?
 
-PCLs add one more thing to do before you can use `#if`s to conditionally compile different targets: **you need to add a moniker in your** `project.json` **file!**.
+PCLs add one more thing to do before you can use `#if`s to conditionally compile different targets: **you need to add a compilation definition in your** `project.json` **file!**.
 
 For example, if you wanted to target PCL profile 328 (.NET 4.0, Windows 8, Windows Phone Silverlight 8, Windows Phone 8.1, Silverlight 5.0), you may want to refer it to as "PORTABLE328" when cross-compiling.  Simply add it to the `project.json` file as a `compilationOptions` attribute:
 
