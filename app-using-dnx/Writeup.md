@@ -83,7 +83,7 @@ And now you have the necessary files to publish a NuGet package!
 
 ## How do I target a PCL?
 
-Targeting a PCL profile is a bit trickier.  For starters, [reference this list of PCL profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY) to ensure you have the correct target.  Hover over the Name of each entry for the framework identifier, which you will need.
+Targeting a PCL profile is a bit trickier.  For starters, [reference this list of PCL profiles](http://embed.plnkr.co/03ck2dCtnJogBKHJ9EjY/preview) to ensure you have the correct target.  Hover over the Name of each entry for the framework identifier, which you will need.
 
 Unfortunately, you will need to list the dependencies for each target when you wish to additionally target a PCL with your library.  Something like this:
 
@@ -118,7 +118,7 @@ Here is an example targeting PCL Profile 344 and .NET Core, using only `System.R
                 "System.Runtime":"4.0.0-rc1-*"
             }
         },
-        ".NETPortable,Version=v4.0,Profile=Profile344":{
+        ".NETPortable,Version=v4.0,Profile=Profile328":{
             "frameworkAssemblies":{
                 "mscorlib":"",
                 "System":"",
@@ -129,7 +129,7 @@ Here is an example targeting PCL Profile 344 and .NET Core, using only `System.R
 }
 ```
 
-This will allow you to target .NET Core 5.1, .NET Core 5.5, .NET Framework 4.5, Windows 8, Windows Phone 8.1, and Silverlight 5.0.
+This will allow you to target .NET Core 5.1, .NET Core 5.5, .NET Framework 4.0, Windows 8, Windows Phone 8.1, WIndows Phone Silverlight 8.1, and Silverlight 5.0.
 
 Run `dnu restore` and `dnu build` from the command line, and your library can now be built!  You will now notice three new entries in your `/bin/Debug` folder:
 
@@ -148,7 +148,7 @@ Finally, run `dnu pack` to build a NuGet pakage, and your `/bin/Debug` folder sh
    /Debug
       /dotnet51
       /dotnet55
-      /portable-net45+sl50+netcore45+wpa81+wp8
+      /portable-net40+sl50+netcore45+wpa81+wp8
       Lib.1.0.0.nupkg
       Lib.1.0.0.symbols.nupkg
 ```
@@ -245,33 +245,29 @@ And that's it!
 
 ## But What about Portable Libraries?
 
-//TODO -- replace with actual libraries
-
 PCLs add *one* more thing to do before you can use `#if`s to conditionally compile different targets: **you need to add a moniker in your** `project.json` **file!**.
 
-For example, if you wanted to targeting PCL profile 344, you may want to refer it to as "PORTABLE344" when cross-compiling.  Simply add it to the `project.json` file as a `compilationOptions` attribute:
+For example, if you wanted to targeting PCL profile 328 (.NET 4.0, Windows 8, Windows Phone Silverlight 8, Windows Phone 8.1, Silverlight 5.0), you may want to refer it to as "PORTABLE328" when cross-compiling.  Simply add it to the `project.json` file as a `compilationOptions` attribute:
 
 ```
 {
     "frameworks":{
-        "dotnet51":{
-           "dependencies":{
-                "System.Runtime":"4.0.0-rc1-*"
-            }
-        },
         "dotnet55":{
            "dependencies":{
-                "System.Runtime":"4.0.0-rc1-*"
+                "System.Runtime":"4.0.0-rc1-*",
+                "System.Net.Http":"4.0.0-rc1-*",
+                "System.Thread.Tasks":"4.0.0-rc1-*"
             }
         },
-        ".NETPortable,Version=v4.0,Profile=Profile344":{
+        ".NETPortable,Version=v4.0,Profile=Profile328":{
             "compilationOptions": {
-                "define": [ "PORTABLE344" ]
+                "define": [ "PORTABLE328" ]
             },
             "frameworkAssemblies":{
                 "mscorlib":"",
                 "System":"",
-                "System.Core":""
+                "System.Core":"",
+                "System.Net"
             }
         }
     }
@@ -282,9 +278,11 @@ For example, if you wanted to targeting PCL profile 344, you may want to refer i
 Now you can conditionally compile against that target:
 
 ```csharp
-#if PORTABLE344
-using System.Foo.Portable344CompatibleLibrary;
+#if !PORTABLE328
+using System.Net.Http;
+using System.Threading.Tasks;
+// Potentially other namespaces which aren't compatible with Profile 328
 #endif
 ```
 
-And that's it! `PORTABLE344` is now recognized by the compiler, and the `.dll` generated for that target will now contain `System.Foo.Portable344CompatibleLibrary`, but your other target `.dll`s will not.
+And that's it! `PORTABLE328` is now recognized by the compiler, and the `.dll` will not use `System.Net.Http` or `System.Threading.Tasks`.
