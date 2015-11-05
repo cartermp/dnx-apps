@@ -15,7 +15,7 @@ You need to pick a version of `dotnetXX` (where `XX` is a version number) to add
 1. If you don't care about backwards compatibility, target `dotnet55`.
 2. If you care about compatibility with any of the following:
 
-    - .NET Framework versions from 4.5 and up
+    - .NET Framework versions from 4.5 and up (and you don't need [these libraries](LINK))
     - Windows Phone
     - Windows Phone Silverlight
     - Universal Windows Platform
