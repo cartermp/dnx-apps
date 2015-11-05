@@ -50,7 +50,7 @@ And that's it!
 
 ## How do I target both .NET Core and .NET Framework?
 
-You may need a library to work on .NET Core *and* older versions of the .NET Framework.  You may also need to use specific libraries available in .NET 4.5 which are unavailble in .NET Core (such as `SYSTEM.FIXME.SOON`).  For these scenarios, you will need to specifically target the versions of .NET Framework you support.
+You may need a library to work on .NET Core *and* .NET Framework 4.0 or older.  You may also need to use specific libraries available in .NET 4.5 which are unavailble in .NET Core (such as `SYSTEM.FIXME.SOON`).  For these scenarios, you will need to specifically target the versions of .NET Framework you support.
 
 This is done by adding relevant Target Framework Moniker, such as `net45` to your `project.json` file.  Below is a sample `project.json` file which targets .NET 4.0, .NET 4.5, and .NET Core.
 
@@ -99,7 +99,7 @@ Targeting a PCL profile is a bit trickier.  For starters, [reference this list o
 
 You will then need to do two things:
 
-1. List the dependencies for each target *inside* of that target.  No "global" `dependencies` section can be used.
+1. List the dependencies for each target *inside* of that target.  The "global" `dependencies` section cannot be used.
 2. List the framework assemblies you are using in your code *inside* the PCL target profile section.  This will likely require, at a minimum, `mscorlib`, `System`, and `System.Core`.
 
 Here is an example targeting PCL Profile 328 and .NET Core, using only `System.Runtime` as a dependency.
@@ -222,6 +222,7 @@ And further down in the source, you can use guards to use those libraries condit
           
             var uri = new Uri(url);
             
+            // Lock here to provide thread-safety.
             lock(_locker)
             {
                 var result = _client.DownloadString(uri);
@@ -237,7 +238,7 @@ And further down in the source, you can use guards to use those libraries condit
         {
             string url = "http://www.dotnetfoundation.org/";
             
-            // HttpClient is threadsafe, so no need to explicitly lock here
+            // HttpClient is thread-safe, so no need to explicitly lock here
             var result = await _client.GetStringAsync(url);
             
             int dotNetCount = Regex.Matches(result, ".NET").Count;
@@ -250,7 +251,7 @@ And further down in the source, you can use guards to use those libraries condit
 
 And that's it!
 
-### But What about Portable Libraries?
+### But What about Portable Class Libraries (PCLs)?
 
 PCLs add one more thing to do before you can use `#if`s to conditionally compile different targets: **you need to add a compilation definition in your** `project.json` **file!**.
 
@@ -292,4 +293,4 @@ using System.Threading.Tasks;
 #endif
 ```
 
-And that's it! `PORTABLE328` is now recognized by the compiler, and the `.dll` will not use `System.Net.Http` or `System.Threading.Tasks`.
+And that's it! `PORTABLE328` is now recognized by the compiler, and the `.dll` generated will not use `System.Net.Http` or `System.Threading.Tasks`.
