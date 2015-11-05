@@ -250,7 +250,7 @@ And further down in the source, you can use guards to use those libraries condit
 
 And that's it!
 
-## But What about Portable Libraries?
+### But What about Portable Libraries?
 
 PCLs add one more thing to do before you can use `#if`s to conditionally compile different targets: **you need to add a moniker in your** `project.json` **file!**.
 
