@@ -23,7 +23,7 @@ You need to pick a version of `dotnetXX` (where `XX` is a version number) to add
     - Xamarin Platforms
     - Mono 
 
-    Then [refer to this table](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md#existing-net-standard-platform-versions) to choose the version of the `dotnetXX` moniker you need.
+    Then [refer to this table](https://github.com/davidfowl/aspnetvnextwebapiapp/blob/master/Generations.md#existing-net-standard-platform-versions) and choose the version of the `dotnetXX` moniker you need.
 3. If you care about compatibility with the .NET Framework versions 4.0 or below, or need to support [these .NET 4.5 libraries](LINK), skip to the next section.
 
 For example, if you wanted to have compatibility with .NET Core and .NET Framework 4.6, you would pick `dotnet55`:
