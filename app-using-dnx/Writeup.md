@@ -137,7 +137,7 @@ Run `dnu restore` and `dnu build` from the command line, and your library can no
    /Debug
       /dotnet51
       /dotnet55
-      /portable-net45+sl50+netcore45+wpa81+wp8
+      /portable-net40+sl50+netcore45+wpa81+wp8
 ```
 
 Finally, run `dnu pack` to build a NuGet pakage, and your `/bin/Debug` folder should look like this:
