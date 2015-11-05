@@ -103,7 +103,7 @@ Unfortunately, you will need to list the dependencies for each target when you w
 
 Additionally, you will need to list the framework assemblies you choose to reference inside each PCL target profile in your `project.json` file.  This will likely require, at a minimum, `mscorlib`, `System`, and `System.Core`.
 
-Here is an example targeting PCL Profile 344 and .NET Core, using only `System.Runtime` as a dependency.
+Here is an example targeting PCL Profile 328 and .NET Core, using only `System.Runtime` as a dependency.
 
 ```
 {
@@ -194,7 +194,7 @@ Next, your `using`s in your source file can be adjusted like this:
 
 ```csharp
 #if NET40
-// This only compiles for non .NET 4.0 targets
+// This only compiles for non-.NET 4.0 targets
 using System.Net;
 #else
 // This compiles for all other targets
@@ -210,27 +210,35 @@ And further down in the source, you can use guards to use those libraries condit
     {
 #if NET40
         private readonly WebClient _client = new WebClient();
+        private readonly object _locker = new object();
 #else
         private readonly HttpClient _client = new HttpClient();
 #endif
 
 #if NET40
+        // .NET 4.0 does not have async/await
         public string GetDotNetCount()
         {
             string url = "http://www.dotnetfoundation.org/";
           
             var uri = new Uri(url);
-            var result = _client.DownloadString(uri);
+            
+            lock(_locker)
+            {
+                var result = _client.DownloadString(uri);
+            }
             
             int dotNetCount = Regex.Matches(result, ".NET").Count;
             
             return $"Dotnet Foundation mentions .NET {dotNetCount} times!";
         }
 #else
+        // .NET 4.5+ can use async/await!
         public async Task<string> GetDotNetCountAsync()
         {
             string url = "http://www.dotnetfoundation.org/";
             
+            // HttpClient is threadsafe, so no need to explicitly lock here
             var result = await _client.GetStringAsync(url);
             
             int dotNetCount = Regex.Matches(result, ".NET").Count;
@@ -245,9 +253,9 @@ And that's it!
 
 ## But What about Portable Libraries?
 
-PCLs add *one* more thing to do before you can use `#if`s to conditionally compile different targets: **you need to add a moniker in your** `project.json` **file!**.
+PCLs add one more thing to do before you can use `#if`s to conditionally compile different targets: **you need to add a moniker in your** `project.json` **file!**.
 
-For example, if you wanted to targeting PCL profile 328 (.NET 4.0, Windows 8, Windows Phone Silverlight 8, Windows Phone 8.1, Silverlight 5.0), you may want to refer it to as "PORTABLE328" when cross-compiling.  Simply add it to the `project.json` file as a `compilationOptions` attribute:
+For example, if you wanted to target PCL profile 328 (.NET 4.0, Windows 8, Windows Phone Silverlight 8, Windows Phone 8.1, Silverlight 5.0), you may want to refer it to as "PORTABLE328" when cross-compiling.  Simply add it to the `project.json` file as a `compilationOptions` attribute:
 
 ```
 {
