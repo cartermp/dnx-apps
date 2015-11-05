@@ -222,10 +222,12 @@ And further down in the source, you can use guards to use those libraries condit
           
             var uri = new Uri(url);
             
+            string result = "";
+            
             // Lock here to provide thread-safety.
             lock(_locker)
             {
-                var result = _client.DownloadString(uri);
+                result = _client.DownloadString(uri);
             }
             
             int dotNetCount = Regex.Matches(result, ".NET").Count;
