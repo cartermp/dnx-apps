@@ -15,6 +15,7 @@ namespace Lib
     {
 #if NET40
         private readonly WebClient _client = new WebClient();
+        private readonly object _locker = new object();
 #else
         private readonly HttpClient _client = new HttpClient();
 #endif
@@ -25,7 +26,11 @@ namespace Lib
             string url = "http://www.dotnetfoundation.org/";
           
             var uri = new Uri(url);
-            var result = _client.DownloadString(uri);
+            
+            lock(_locker)
+            {
+                var result = _client.DownloadString(uri);
+            }
             
             int dotNetCount = Regex.Matches(result, ".NET").Count;
             
