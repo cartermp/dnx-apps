@@ -27,9 +27,11 @@ namespace Lib
           
             var uri = new Uri(url);
             
+            string result = "";
+            
             lock(_locker)
             {
-                var result = _client.DownloadString(uri);
+                result = _client.DownloadString(uri);
             }
             
             int dotNetCount = Regex.Matches(result, ".NET").Count;
