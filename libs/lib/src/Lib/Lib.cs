@@ -30,7 +30,7 @@ namespace Lib
             string result = "";
             
             lock(_locker)
-            {
+            { 
                 result = _client.DownloadString(uri);
             }
             
@@ -47,7 +47,7 @@ namespace Lib
             
             int dotNetCount = Regex.Matches(result, ".NET").Count;
             
-            return $"dotnetfoundation.orgmentions .NET {dotNetCount} times in its HTML!";
+            return $"dotnetfoundation.org mentions .NET {dotNetCount} times in its HTML!";
         }
 #endif
     }
