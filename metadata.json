@@ -1,0 +1,6 @@
+{
+    "concepts":["dotnet", "dnx"],
+    "lang":"C#",
+    "title":"DNX Apps",
+    "description":"A collection of .NET Core projects."
+}
