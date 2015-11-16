@@ -1,0 +1,13 @@
+{
+    "dependencies":{
+        "ClassLibrary":"",
+    },
+    "frameworks":{
+        "dnxcore50":{
+            "dependencies":{
+                "System.Runtime":"4.0.0-rc1-*",
+                "System.Console":"4.0.0-beta-*"
+            }
+        }
+    }
+}
