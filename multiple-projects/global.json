@@ -1,6 +1,6 @@
 {
     "projects":[
-        "ConsoleAppProjectFolder",
-        "ClassLibraryProjectFolder"
+        "ConsoleApp",
+        "ClassLibrary"
     ]
 }
